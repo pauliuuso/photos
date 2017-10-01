@@ -1,0 +1,2 @@
+<button *ngIf="!userService.GetUserLoggedIn()" routerLink="/login" class="btn btn-primary">{{buttonText}}</button>
+<p *ngIf="userService.GetUserLoggedIn()">{{userService.username}}</p>

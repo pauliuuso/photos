@@ -1,0 +1,12 @@
+.pc-header
+{
+    height: 150px;
+    background: #eee3ab;
+}
+
+.pc-login-button
+{
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
+}

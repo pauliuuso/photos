@@ -12,7 +12,9 @@ export class LoginformComponent implements OnInit
 {
   public username:string;
   public password:string;
-  private url:string = "http://photos.local/api/user/login";
+  private url:string = "http://photos.teroute.com/api/user/login";
+  private data:Object;
+  private errorMessage:string;
 
   constructor(private router:Router, private userService:UserService, private http:Http) { }
 
@@ -23,14 +25,40 @@ export class LoginformComponent implements OnInit
   public LoginUser(event)
   {
     event.preventDefault();
+    this.errorMessage = "";
 
-    if(this.username == "p.jazauskas@gmail.com" && this.password == "freedom1000")
+    if(this.username != "" && this.password != "")
     {
-      this.userService.SetUserLoggedIn();
-      this.userService.username = this.username;
-      this.router.navigate(['/dashboard']);
+      this.http.post(
+      this.url,
+      {name: this.username, password: this.password})
+      .subscribe(
+        data => 
+        {
+          // this.userService.username = data.
+          this.data = data.json();
+          if(this.data["message"] == "OK")
+          {
+            this.userService.username = this.username;
+            this.userService.id = this.data["id"];
+            this.userService.token = this.data["token"];
 
-      this.http.post(this.url, {name: this.username, password: this.password}).subscribe(result => console.log(result));
+            this.userService.SetUserLoggedIn();
+            this.router.navigate([""]);
+          }
+          else
+          {
+            this.errorMessage = this.data["message"];
+          }
+        },
+        error =>
+        {
+          this.errorMessage = error.message;
+          console.log(error);
+        }
+      );
+
+
     }
 
   }

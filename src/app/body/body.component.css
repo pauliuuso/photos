@@ -1,17 +1,10 @@
-.pc-container
+.pc-body
 {
-    width: 100%;
-    height: 100%;
+    background: #d9cfc1;
     display: flex;
-    flex-direction: column;
+    flex: 1;
+    flex-direction: row;
     justify-content: flex-start; /* align items in Main Axis */
     align-items: stretch; /* align items in Cross Axis */
     align-content: stretch; /* Extra space in Cross Axis */
-    background: black;
-}
-
-.pc-flex
-{
-    display: flex;
-    height: 100%;
 }
