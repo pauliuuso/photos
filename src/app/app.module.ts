@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginformComponent } from './loginform/loginform.component';
@@ -13,8 +12,10 @@ import { HttpModule } from '@angular/http';
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { MenuComponent } from './menu/menu.component';
 import { BodyComponent } from './body/body.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-const appRoutes:Routes =
+const appRoutes: Routes =
 [
   {
     path: '',
@@ -24,8 +25,12 @@ const appRoutes:Routes =
   {
     path: 'login',
     component: LoginformComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -36,13 +41,15 @@ const appRoutes:Routes =
     DashboardComponent,
     LoginButtonComponent,
     MenuComponent,
-    BodyComponent
+    BodyComponent,
+    SignUpComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule
   ],
   providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]

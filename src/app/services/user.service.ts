@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class UserService 
+export class UserService
 {
 
   private isLogged:boolean;
   public username:string;
   public id:string;
   public token:string;
+  public baseApiUrl = "http://photos.teroute.com/api";
 
-  constructor() 
+  constructor()
   {
     this.isLogged = false;
   }
