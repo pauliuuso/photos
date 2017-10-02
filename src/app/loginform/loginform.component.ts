@@ -54,7 +54,6 @@ export class LoginformComponent implements OnInit
         error =>
         {
           this.errorMessage = error.message;
-          console.log(error);
         }
       );
     }
