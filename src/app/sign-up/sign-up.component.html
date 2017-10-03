@@ -46,7 +46,7 @@
 
         <div class="form-group"
             [ngClass]="{
-              'has-danger': (password2.dirty && password2.invalid) || (password2.dirty && !Match(password1.value, password2.value)),
+              'has-danger': (password2.dirty && password2.invalid) || (password2.dirty && !validatorService.Match(password1.value, password2.value)),
               'has-success': password2.dirty && password2.valid
             }"
         >
@@ -56,7 +56,7 @@
             <p *ngIf="password2.errors.required">Laukelis yra būtinas!</p>
             <p *ngIf="password2.errors.minlength && password2.touched">Slaptažodis turi būti ne trumpesnis nei 8 simboliai.</p>
           </div>
-          <div class="form-control-feedback" *ngIf="password2.dirty && password2.touched && !Match(password1.value, password2.value)">
+          <div class="form-control-feedback" *ngIf="password2.dirty && password2.touched && !validatorService.Match(password1.value, password2.value)">
             Slaptažodžiai nesutampa!
           </div>
         </div>
@@ -68,3 +68,4 @@
       <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+

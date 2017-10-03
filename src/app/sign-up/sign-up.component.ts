@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { ValidatorService } from '../services/validator.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Http } from '@angular/http';
@@ -24,7 +25,7 @@ export class SignUpComponent implements OnInit {
   private url:string = this.userService.baseApiUrl + "/user/create";
   private errorMessage:string;
 
-  constructor(private userService:UserService, private http:Http, private router:Router) { }
+  constructor(private userService:UserService, private validatorService:ValidatorService, private http:Http, private router:Router) { }
 
   ngOnInit()
   {
@@ -52,11 +53,6 @@ export class SignUpComponent implements OnInit {
             password2: this.password2
         })
     });
-  }
-
-  public Match(string1:string, string2:string)
-  {
-    return string1 === string2;
   }
 
   public CreateUser(event)

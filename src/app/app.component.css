@@ -4,14 +4,13 @@
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* align items in Main Axis */
-    align-items: stretch; /* align items in Cross Axis */
-    align-content: stretch; /* Extra space in Cross Axis */
+    align-items: stretch;
+    align-content: stretch;
     background: black;
 }
 
 .pc-flex
 {
     display: flex;
-    min-height: 100%;
+    flex: 1;
 }

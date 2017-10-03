@@ -14,6 +14,7 @@ import { MenuComponent } from './menu/menu.component';
 import { BodyComponent } from './body/body.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ValidatorService } from './services/validator.service';
 
 const appRoutes: Routes =
 [
@@ -51,7 +52,7 @@ const appRoutes: Routes =
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, AuthGuard],
+  providers: [UserService, ValidatorService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-button',
@@ -8,11 +9,16 @@ import { UserService } from '../services/user.service';
 })
 export class LoginButtonComponent implements OnInit {
 
-  @Input('button-text') buttonText:String;
   private isLogged = this.userService.GetUserLoggedIn();
   private email = this.userService.email;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService:UserService, private router:Router) { }
+
+  public LogOut()
+  {
+    this.userService.SetUserLoggedOut();
+    this.router.navigate([""]);
+  }
 
   ngOnInit() {
   }

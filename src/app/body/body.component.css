@@ -2,7 +2,7 @@
 {
     background: #d9cfc1;
     display: flex;
-    flex: 1;
+    flex: auto;
     flex-direction: row;
     justify-content: flex-start; /* align items in Main Axis */
     align-items: stretch; /* align items in Cross Axis */

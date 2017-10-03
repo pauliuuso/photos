@@ -21,6 +21,15 @@ export class UserService
     this.isLogged = true;
   }
 
+  public SetUserLoggedOut()
+  {
+    this.isLogged = false;
+    this.email = "";
+    this.name = "";
+    this.id = "";
+    this.token = "";
+  }
+
   public GetUserLoggedIn()
   {
     return this.isLogged;
