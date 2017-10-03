@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit {
-
+export class SignUpComponent implements OnInit
+{
   // form itself
   form:FormGroup;
 
@@ -20,7 +20,6 @@ export class SignUpComponent implements OnInit {
   email:FormControl;
   password1:FormControl;
   password2:FormControl;
-  passwordsMatch = false;
 
   private url:string = this.userService.baseApiUrl + "/user/create";
   private errorMessage:string;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Http } from '@angular/http';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-loginform',
@@ -10,8 +11,10 @@ import { Http } from '@angular/http';
 })
 export class LoginformComponent implements OnInit
 {
-  public email:string;
-  public password:string;
+  form:FormGroup;
+
+  email:FormControl;
+  password:FormControl;
 
   private url:string = this.userService.baseApiUrl + "/user/login";
   private errorMessage:string;
@@ -20,14 +23,30 @@ export class LoginformComponent implements OnInit
 
   ngOnInit()
   {
+    this.CreateFormControls();
+    this.CreateForm();
   }
 
-  public LoginUser(event)
+  public CreateFormControls()
   {
-    event.preventDefault();
+    this.email = new FormControl('', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]);
+    this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  }
+
+  public CreateForm()
+  {
+    this.form = new FormGroup
+    ({
+      email: this.email,
+      password: this.password
+    });
+  }
+
+  public LoginUser()
+  {
     this.errorMessage = "";
 
-    if(this.email !== "" && this.password !== "")
+    if(this.form.valid)
     {
       this.http.post(
       this.url,
@@ -39,7 +58,7 @@ export class LoginformComponent implements OnInit
           const response = data.json();
           if(response["message"] === "OK")
           {
-            this.userService.email = this.email;
+            this.userService.email = this.email.value;
             this.userService.id = response["id"];
             this.userService.token = response["token"];
             this.userService.name = response["name"];
@@ -58,5 +77,6 @@ export class LoginformComponent implements OnInit
         }
       );
     }
+
   }
 }

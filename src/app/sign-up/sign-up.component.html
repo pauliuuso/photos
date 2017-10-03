@@ -24,7 +24,8 @@
         <label for="email">Elektroninis paštas:</label>
         <input name="email" type="email" class="form-control" placeholder="El. paštas" formControlName="email">
         <div class="form-control-feedback" *ngIf="email.dirty && email.invalid && email.touched">
-          e-mail adresas neteisingas, adresas turi turėti @ ženklą.
+          <p *ngIf="email.errors.pattern">e-mail adresas neteisingas, adresas turi turėti @ ženklą.</p>
+          <p *ngIf="email.errors.required">Laukelis yra būtinas!</p>
         </div>
       </div>
 
