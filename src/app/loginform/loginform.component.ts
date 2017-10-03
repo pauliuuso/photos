@@ -50,7 +50,7 @@ export class LoginformComponent implements OnInit
     {
       this.http.post(
       this.url,
-      {email: this.email, password: this.password})
+      {email: this.email.value, password: this.password.value})
       .subscribe(
         data =>
         {

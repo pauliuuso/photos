@@ -1,0 +1,21 @@
+<div class="col-12 col-md-6 card upload-form">
+  <h2>Įkelti nuotrauką</h2>
+  <form [formGroup]="form" (ngSubmit)="UploadPhoto()" novalidate>
+
+    <div class="form-group"
+      [ngClass]="
+      {
+        'has-danger': pictureName.dirty && pictureName.invalid,
+        'has-success': pictureName.dirty && pictureName.valid
+      }"
+    >
+      <label for="pictureName">Nuotraukos pavadinimas:</label>
+      <input type="text" name="pictureName" class="form-control" formControlName="pictureName" placeholder="Pavadinimas">
+      <div class="form-control-feedback" *ngIf="pictureName.dirty && pictureName.touched && pictureName.invalid">
+        <p *ngIf="pictureName.errors.required">Laukelis yra būtinas!</p>
+      </div>
+    </div>
+
+  </form>
+
+</div>

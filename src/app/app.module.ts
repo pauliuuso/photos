@@ -15,6 +15,7 @@ import { BodyComponent } from './body/body.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ValidatorService } from './services/validator.service';
+import { UploadComponent } from './upload/upload.component';
 
 const appRoutes: Routes =
 [
@@ -30,6 +31,11 @@ const appRoutes: Routes =
   {
     path: 'sign-up',
     component: SignUpComponent
+  },
+  {
+    path: 'upload',
+    canActivate: [AuthGuard],
+    component: UploadComponent
   }
 ];
 
@@ -43,7 +49,8 @@ const appRoutes: Routes =
     LoginButtonComponent,
     MenuComponent,
     BodyComponent,
-    SignUpComponent
+    SignUpComponent,
+    UploadComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
