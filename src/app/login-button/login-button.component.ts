@@ -10,7 +10,7 @@ export class LoginButtonComponent implements OnInit {
 
   @Input('button-text') buttonText:String;
   private isLogged = this.userService.GetUserLoggedIn();
-  private username = this.userService.username;
+  private email = this.userService.email;
 
   constructor(private userService: UserService) { }
 

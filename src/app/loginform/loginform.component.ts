@@ -10,7 +10,7 @@ import { Http } from '@angular/http';
 })
 export class LoginformComponent implements OnInit
 {
-  public username:string;
+  public email:string;
   public password:string;
   private url:string = this.userService.baseApiUrl + "/user/login";
   private data:Object;
@@ -27,11 +27,11 @@ export class LoginformComponent implements OnInit
     event.preventDefault();
     this.errorMessage = "";
 
-    if(this.username != "" && this.password != "")
+    if(this.email != "" && this.password != "")
     {
       this.http.post(
       this.url,
-      {name: this.username, password: this.password})
+      {email: this.email, password: this.password})
       .subscribe(
         data =>
         {
@@ -39,9 +39,10 @@ export class LoginformComponent implements OnInit
           this.data = data.json();
           if(this.data["message"] == "OK")
           {
-            this.userService.username = this.username;
+            this.userService.email = this.email;
             this.userService.id = this.data["id"];
             this.userService.token = this.data["token"];
+            this.userService.name = this.data["name"];
 
             this.userService.SetUserLoggedIn();
             this.router.navigate([""]);

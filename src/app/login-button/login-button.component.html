@@ -2,4 +2,4 @@
   <button routerLink="/login" class="btn btn-primary">Prisijungti</button>
   <a class="register-link" routerLink="/sign-up"><p>Registruotis</p></a>
 </div>
-<p *ngIf="userService.GetUserLoggedIn()">{{userService.username}}</p>
+<p *ngIf="userService.GetUserLoggedIn()">{{userService.email}}</p>

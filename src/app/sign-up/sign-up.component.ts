@@ -16,7 +16,7 @@ export class SignUpComponent implements OnInit {
   form:FormGroup;
 
   name:FormControl;
-  username:FormControl;
+  email:FormControl;
   password1:FormControl;
   password2:FormControl;
   passwordsMatch = false;
@@ -35,7 +35,7 @@ export class SignUpComponent implements OnInit {
   public CreateFormControls()
   {
     this.name = new FormControl('', Validators.required);
-    this.username = new FormControl('', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]);
+    this.email = new FormControl('', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]);
     this.password1 = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.password2 = new FormControl('', [Validators.required, Validators.minLength(8)]);
   }
@@ -45,7 +45,7 @@ export class SignUpComponent implements OnInit {
     this.form = new FormGroup
     ({
         name: this.name,
-        username: this.username,
+        email: this.email,
         passwordGroup: new FormGroup
         ({
             password1: this.password1,
@@ -69,7 +69,7 @@ export class SignUpComponent implements OnInit {
       this.http.post
       (
         this.url,
-        {name: this.name.value, password: this.password1.value, email: this.username.value}
+        {name: this.name.value, password: this.password1.value, email: this.email.value}
       ).subscribe
       (
         data =>
@@ -77,8 +77,8 @@ export class SignUpComponent implements OnInit {
           const response = data.json();
           if(response["message"] === "OK")
           {
-            this.userService.username = this.username.value;
-            this.userService.userNickName = this.name.value;
+            this.userService.email = this.email.value;
+            this.userService.name = this.name.value;
             this.userService.id = response["id"];
             this.userService.token = response["token"];
 
