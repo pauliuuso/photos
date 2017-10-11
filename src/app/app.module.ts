@@ -16,6 +16,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ValidatorService } from './services/validator.service';
 import { UploadComponent } from './upload/upload.component';
+import { NgProgressModule } from 'ngx-progressbar';
 
 const appRoutes: Routes =
 [
@@ -34,7 +35,7 @@ const appRoutes: Routes =
   },
   {
     path: 'upload',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     component: UploadComponent
   }
 ];
@@ -57,7 +58,8 @@ const appRoutes: Routes =
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgProgressModule
   ],
   providers: [UserService, ValidatorService, AuthGuard],
   bootstrap: [AppComponent]
