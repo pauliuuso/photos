@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { UserService } from '../services/user.service';
@@ -9,15 +9,16 @@ import { NgProgressService } from 'ngx-progressbar';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css']
 })
-export class UploadComponent implements OnInit
+export class UploadComponent implements OnInit, OnDestroy
 {
   errorMessage:string;
   form:FormGroup;
   pictureName:FormControl;
   fileInput:Object;
   fileName:string;
-  picture:any;
-  url = this.userService.baseApiUrl + "/photo/upload";
+  picture:FormData;
+  picture2:any;
+  url = this.userService.baseApiUrl + "/photos/upload";
 
   constructor(private http: Http, private userService: UserService, public progressService: NgProgressService) { }
 
@@ -26,6 +27,7 @@ export class UploadComponent implements OnInit
     this.CreateFormControls();
     this.CreateForm();
 
+
     this.fileInput =
     {
       errors:
@@ -33,6 +35,10 @@ export class UploadComponent implements OnInit
         required: false
       }
     };
+  }
+
+  ngOnDestroy()
+  {
   }
 
   public CreateFormControls()
@@ -54,10 +60,14 @@ export class UploadComponent implements OnInit
 
     if(fileList && fileList.length > 0)
     {
-      this.picture = fileList[0];
+      this.picture = new FormData();
+      this.picture.append("picture", fileList[0]);
+      this.picture.append("title", this.pictureName.value);
+      this.picture.append("token", this.userService.token);
+      this.picture.append("userId", this.userService.id);
 
       const imageFile: any = document.querySelector("#imageFile");
-      imageFile.file = this.picture;
+      imageFile.file = fileList[0];
 
       const reader = new FileReader();
       reader.onload = (function(tempImg)
@@ -68,8 +78,8 @@ export class UploadComponent implements OnInit
         };
       })(imageFile);
 
-      reader.readAsDataURL(this.picture);
-      this.fileName = this.picture.name;
+      reader.readAsDataURL(fileList[0]);
+      this.fileName = fileList[0].name;
 
     }
 
@@ -79,20 +89,18 @@ export class UploadComponent implements OnInit
   {
     if(this.form.valid)
     {
-      alert("upload");
-      const url = this.userService.baseApiUrl + "/photo/upload";
-
-      this.progressService.start();
+      //this.progressService.start();
       this.http.post
       (
         this.url,
-        { name: this.pictureName.value, picture: this.picture }
+        this.picture
       ).subscribe
       (
         data =>
         {
           const response = data.json();
-          this.progressService.done();
+          console.log(response);
+          //this.progressService.done();
         },
         error =>
         {

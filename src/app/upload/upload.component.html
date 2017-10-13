@@ -24,12 +24,14 @@
       </label>
 
       <div class="form-control-feedback" >
-        <p *ngIf="fileInput.errors.required">Nuotrauka yra būtina</p>
+        <p>Nuotrauka yra būtina</p>
       </div>
 
       <p>{{fileName}}</p>
       <img id="imageFile" class="image-file col-12 p-0 m-0"/>
     </div>
+
+    {{errorMessage | json}}
 
     <button type="submit" class="btn btn-primary">Siųsti</button>
 

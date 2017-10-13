@@ -12,7 +12,7 @@ export class LoginButtonComponent implements OnInit {
   private isLogged = this.userService.GetUserLoggedIn();
   private email = this.userService.email;
 
-  constructor(private userService:UserService, private router:Router) { }
+  constructor(public userService:UserService, private router:Router) { }
 
   public LogOut()
   {

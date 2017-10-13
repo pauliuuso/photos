@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Http } from '@angular/http';
@@ -9,7 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './loginform.component.html',
   styleUrls: ['./loginform.component.css']
 })
-export class LoginformComponent implements OnInit
+export class LoginformComponent implements OnInit, OnDestroy
 {
   form:FormGroup;
 
@@ -17,7 +17,7 @@ export class LoginformComponent implements OnInit
   password:FormControl;
 
   private url:string = this.userService.baseApiUrl + "/user/login";
-  private errorMessage:string;
+  public errorMessage:string;
 
   constructor(private router:Router, private userService:UserService, private http:Http) { }
 
@@ -25,6 +25,12 @@ export class LoginformComponent implements OnInit
   {
     this.CreateFormControls();
     this.CreateForm();
+
+  }
+
+  ngOnDestroy()
+  {
+
   }
 
   public CreateFormControls()

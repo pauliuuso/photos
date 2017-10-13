@@ -23,9 +23,9 @@ export class SignUpComponent implements OnInit
   password2:FormControl;
 
   private url:string = this.userService.baseApiUrl + "/user/create";
-  private errorMessage:string;
+  public errorMessage:string;
 
-  constructor(private userService:UserService, private validatorService:ValidatorService, private http:Http, private router:Router, public progressService: NgProgressService) { }
+  constructor(public userService:UserService, public validatorService:ValidatorService, private http:Http, private router:Router, public progressService: NgProgressService) { }
 
   ngOnInit()
   {
@@ -55,7 +55,7 @@ export class SignUpComponent implements OnInit
     });
   }
 
-  public CreateUser(event)
+  public CreateUser()
   {
     this.errorMessage = "";
 
