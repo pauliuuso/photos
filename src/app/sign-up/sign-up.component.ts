@@ -5,7 +5,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { NgProgressService } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,7 +24,7 @@ export class SignUpComponent implements OnInit
   private url:string = this.userService.baseApiUrl + "/user/create";
   public errorMessage:string;
 
-  constructor(public userService:UserService, public validatorService:ValidatorService, private http:Http, private router:Router, public progressService: NgProgressService) { }
+  constructor(public userService:UserService, public validatorService:ValidatorService, private http:Http, private router:Router) { }
 
   ngOnInit()
   {
@@ -61,7 +60,6 @@ export class SignUpComponent implements OnInit
 
     if(this.form.valid)
     {
-      this.progressService.start();
 
       this.http.post
       (
@@ -86,12 +84,10 @@ export class SignUpComponent implements OnInit
           {
             this.errorMessage = response["message"];
           }
-          this.progressService.done();
         },
         error =>
         {
           this.errorMessage = error.message;
-          this.progressService.done();
         }
       );
     }

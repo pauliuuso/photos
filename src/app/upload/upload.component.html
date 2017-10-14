@@ -1,4 +1,3 @@
-<ng-progress></ng-progress>
 <div class="col-12 col-md-6 card upload-form">
   <h2>Įkelti nuotrauką</h2>
   <form [formGroup]="form" (ngSubmit)="UploadPhoto()" novalidate>
@@ -31,9 +30,9 @@
       <img id="imageFile" class="image-file col-12 p-0 m-0"/>
     </div>
 
-    {{errorMessage | json}}
+    <p>{{errorMessage | json}}</p>
 
-    <button type="submit" class="btn btn-primary">Siųsti</button>
+    <button type="submit" [ngClass]="{'btn-disabled': isUploading, 'btn-primary': !isUploading}" class="btn">Siųsti</button>
 
   </form>
 

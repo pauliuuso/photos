@@ -1,3 +1,12 @@
-<p>
-  Welcome!
-</p>
+<h2 class="text-center py-2">Galerija</h2>
+<div class="row">
+  <div *ngFor="let photo of photos" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+    <a class="dashboard-item" routerLink="/photo/{{photo.id}}">
+      <div class="card p-1">
+        <img class="col-12 p-0 m-0" src="{{photo.url}}"/>
+        <h4>{{photo.title}}</h4>
+        <p class="p-0 m-0"><i class="text-grey">Author: {{photo.owner}}</i></p>
+      </div>
+    </a>
+  </div>
+</div>

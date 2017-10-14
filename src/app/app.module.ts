@@ -16,13 +16,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ValidatorService } from './services/validator.service';
 import { UploadComponent } from './upload/upload.component';
-import { NgProgressModule } from 'ngx-progressbar';
+import { PhotoComponent } from './photo/photo.component';
 
 const appRoutes: Routes =
 [
   {
     path: '',
-    // canActivate: [AuthGuard],
     component: DashboardComponent
   },
   {
@@ -37,6 +36,10 @@ const appRoutes: Routes =
     path: 'upload',
     // canActivate: [AuthGuard],
     component: UploadComponent
+  },
+  {
+    path: 'photo/:id',
+    component: PhotoComponent
   }
 ];
 
@@ -51,15 +54,15 @@ const appRoutes: Routes =
     MenuComponent,
     BodyComponent,
     SignUpComponent,
-    UploadComponent
+    UploadComponent,
+    PhotoComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule,
-    NgProgressModule
+    ReactiveFormsModule
   ],
   providers: [UserService, ValidatorService, AuthGuard],
   bootstrap: [AppComponent]

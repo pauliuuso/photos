@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { UserService } from '../services/user.service';
-import { NgProgressService } from 'ngx-progressbar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
@@ -18,9 +18,10 @@ export class UploadComponent implements OnInit, OnDestroy
   fileName:string;
   picture:FormData;
   picture2:any;
+  isUploading = false;
   url = this.userService.baseApiUrl + "/photos/upload";
 
-  constructor(private http: Http, private userService: UserService, public progressService: NgProgressService) { }
+  constructor(private http: Http, private userService: UserService, private router: Router) { }
 
   ngOnInit()
   {
@@ -89,7 +90,7 @@ export class UploadComponent implements OnInit, OnDestroy
   {
     if(this.form.valid)
     {
-      //this.progressService.start();
+      this.isUploading = true;
       this.http.post
       (
         this.url,
@@ -99,8 +100,11 @@ export class UploadComponent implements OnInit, OnDestroy
         data =>
         {
           const response = data.json();
-          console.log(response);
-          //this.progressService.done();
+          if(response.message == "OK")
+          {
+            this.isUploading = false;
+            this.router.navigate([""]);
+          }
         },
         error =>
         {
