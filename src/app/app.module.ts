@@ -17,6 +17,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ValidatorService } from './services/validator.service';
 import { UploadComponent } from './upload/upload.component';
 import { PhotoComponent } from './photo/photo.component';
+import { DashboardItemComponent } from './dashboard-item/dashboard-item.component';
 
 const appRoutes: Routes =
 [
@@ -55,7 +56,8 @@ const appRoutes: Routes =
     BodyComponent,
     SignUpComponent,
     UploadComponent,
-    PhotoComponent
+    PhotoComponent,
+    DashboardItemComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

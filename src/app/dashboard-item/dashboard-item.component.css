@@ -1,0 +1,40 @@
+.dashboard-item
+{
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+.dashboard-image-wrapper
+{
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-image
+{
+    position: absolute;
+    margin: auto;
+}
+
+.dashboard-item .card
+{
+  height: 400px;
+}
+
+.dashboard-item-loader
+{
+  margin-top: 50px;
+  font-size: 100px;
+}
+
+.dashboard-item-loader-wrapper
+{
+  background: lightgray;
+  height: 100%;
+}
+
+.smaller-than-wrapper
+{
+  width: 100%;
+}

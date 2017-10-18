@@ -64,7 +64,7 @@ export class SignUpComponent implements OnInit
       this.http.post
       (
         this.url,
-        {name: this.name.value, password: this.password1.value, email: this.email.value}
+        { name: this.name.value, password: this.password1.value, email: this.email.value }
       ).subscribe
       (
         data =>
