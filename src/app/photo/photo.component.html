@@ -1,7 +1,16 @@
 <div class="row">
   <div class="col-12 card">
     <h2 class="text-center py-2">{{ photo.title }}</h2>
-    <img class="img-fluid p-0 m-0 pb-3 pc-center" src="{{ photo.url }}">
-    <p><i>Author: <span class="text-grey">{{ photo.owner }}</span></i></p>
+    <div class="col-12 pb-3 pc-center photo-container">
+      <div [ngClass]="{'hidden': loading}" class="img-wrapper text-center mb-3 animated fadeIn">
+        <img (load)="ImageLoaded()" class="pc-center photo" src="{{ photo.url }}"><br/>
+      </div>
+      <div [ngClass]="{'hidden': !loading}" class="img-wrapper text-center mb-3 photo-loader-wrapper">
+        <i class="fa fa-spinner fa-spin photo-loader-spinner"></i>
+      </div>
+      <div class="row">
+        <p><i>Author: <span class="text-grey">{{ photo.owner }}</span></i></p>
+      </div>
+    </div>
   </div>
 </div>

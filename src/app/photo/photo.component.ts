@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
 })
 export class PhotoComponent implements OnInit {
 
+  public loading = true;
   public photoId: string;
   public url = this.userService.baseApiUrl + "/photos/getone";
   public photo: Array<string> = new Array<string>();
@@ -17,7 +18,7 @@ export class PhotoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: Http, private userService: UserService) { }
 
-  ngOnInit() 
+  ngOnInit()
   {
     this.route.params.subscribe(params =>
     {
@@ -35,7 +36,12 @@ export class PhotoComponent implements OnInit {
       {
         this.errorMessage = error.message;
       }
-    )
+    );
+  }
+
+  public ImageLoaded()
+  {
+    this.loading = false;
   }
 
 }

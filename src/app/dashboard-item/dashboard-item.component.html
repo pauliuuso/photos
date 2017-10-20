@@ -1,14 +1,14 @@
 <a class="dashboard-item" routerLink="/photo/{{id}}" (window:resize)="OnResize()">
   <div class="card p-1">
     <div [ngClass]="{'hidden': loading}">
-      <div class="dashboard-image-wrapper">
+      <div class="dashboard-image-wrapper animated fadeIn">
         <img #picture (load)="ImageLoaded()" class="p-0 m-0 dashboard-image" [ngClass]="{'smaller-than-wrapper': smallerThanWrapper}" src="{{url}}"/>
       </div>
       <h4 class="pt-2">{{title}}</h4>
       <p class="p-0 m-0"><i class="text-grey"><span class="text-dark-grey">Autorius:</span> {{author}}</i></p>
       <p class="p-0 m-0"><i class="text-grey"><span class="text-dark-grey">Aprašymas:</span> Čia bus aprašymas</i></p>
     </div>
-    <div class="text-center dashboard-item-loader-wrapper" [ngClass]="{'hidden': !loading}">
+    <div [ngClass]="{'hidden': !loading}" class="text-center dashboard-item-loader-wrapper">
       <i class="fa fa-spinner fa-spin dashboard-item-loader"></i>
     </div>
   </div>
