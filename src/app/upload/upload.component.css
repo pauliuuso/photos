@@ -1,3 +1,8 @@
+:host
+{
+    width: 100%;
+}
+
 .upload-form
 {
     padding: 15px;
@@ -5,7 +10,7 @@
     margin-bottom: 15px;
 }
 
-:host
+.pc-description
 {
-    width: 100%;
+    height: 150px;
 }

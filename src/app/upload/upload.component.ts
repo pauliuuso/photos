@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { UserService } from '../services/user.service';
@@ -9,15 +9,17 @@ import { Router } from '@angular/router';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css']
 })
-export class UploadComponent implements OnInit, OnDestroy
+export class UploadComponent implements OnInit
 {
-  errorMessage:string;
-  form:FormGroup;
-  pictureName:FormControl;
-  fileInput:Object;
-  fileName:string;
-  picture:FormData;
-  picture2:any;
+  errorMessage: string;
+  imageError: string;
+  imageSelected = false;
+  form: FormGroup;
+  pictureName: FormControl;
+  description: FormControl;
+  fileName: string;
+  picture: FormData;
+  picture2: any;
   isUploading = false;
   url = this.userService.baseApiUrl + "/photos/upload";
 
@@ -27,24 +29,12 @@ export class UploadComponent implements OnInit, OnDestroy
   {
     this.CreateFormControls();
     this.CreateForm();
-
-
-    this.fileInput =
-    {
-      errors:
-      {
-        required: false
-      }
-    };
-  }
-
-  ngOnDestroy()
-  {
   }
 
   public CreateFormControls()
   {
     this.pictureName = new FormControl('', Validators.required);
+    this.description = new FormControl('');
   }
 
   public CreateForm()
@@ -52,11 +42,13 @@ export class UploadComponent implements OnInit, OnDestroy
     this.form = new FormGroup
     ({
       pictureName: this.pictureName,
+      description: this.description
     });
   }
 
   public FileChanged(event)
   {
+    this.imageSelected = false;
     const fileList: FileList = event.target.files;
 
     if(fileList && fileList.length > 0)
@@ -66,7 +58,27 @@ export class UploadComponent implements OnInit, OnDestroy
       this.picture.append("title", this.pictureName.value);
       this.picture.append("token", this.userService.token);
       this.picture.append("userId", this.userService.id);
+      this.picture.append("description", this.description.value);
 
+      // picture validation
+      const type = this.picture.get("picture")["type"];
+      const size = this.picture.get("picture")["size"];
+      if(type !== "image/jpeg" && type !== "image/jpg" && type !== "image/png" && type !== "image/gif")
+      {
+        this.imageError = "Palaikomi paveikslėlių tipai yra jpg, png ir gif";
+        this.picture = null;
+        this.fileName = "";
+        return;
+      }
+      if(size > 5242880)
+      {
+        this.imageError = "Nuotraukos dydis turi būti mažesnis nei 5Mb!";
+        this.picture = null;
+        this.fileName = "";
+        return;
+      }
+
+      // show selected image in browser
       const imageFile: any = document.querySelector("#imageFile");
       imageFile.file = fileList[0];
 
@@ -82,12 +94,21 @@ export class UploadComponent implements OnInit, OnDestroy
       reader.readAsDataURL(fileList[0]);
       this.fileName = fileList[0].name;
 
+      this.imageSelected = true;
+      this.imageError = "";
     }
-
   }
 
   public UploadPhoto()
   {
+    this.errorMessage = "";
+
+    if(!this.imageSelected)
+    {
+      this.imageError = "Pasirinkite nuotrauką!";
+      return;
+    }
+
     if(this.form.valid)
     {
       this.isUploading = true;
@@ -99,15 +120,20 @@ export class UploadComponent implements OnInit, OnDestroy
       (
         data =>
         {
+          this.isUploading = false;
           const response = data.json();
           if(response.message == "OK")
           {
-            this.isUploading = false;
             this.router.navigate([""]);
+          }
+          else
+          {
+            this.errorMessage = "Klaida susisiekant su serveriu, bandykite dar kartą.";
           }
         },
         error =>
         {
+          this.isUploading = false;
           this.errorMessage = error.message;
         }
       );
