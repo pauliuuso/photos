@@ -10,4 +10,16 @@ export class ValidatorService {
     return string1 === string2;
   }
 
+  public MaxLength(string1:string, maxLength:number)
+  {
+    if(string1.length > maxLength)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
 }

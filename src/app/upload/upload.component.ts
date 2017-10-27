@@ -114,6 +114,7 @@ export class UploadComponent implements OnInit
       this.isUploading = true;
       this.http.post
       (
+        // TODO - send token //
         this.url,
         this.picture
       ).subscribe
@@ -124,6 +125,8 @@ export class UploadComponent implements OnInit
           const response = data.json();
           if(response.message == "OK")
           {
+            // TODO - get token from server //
+            this.userService.SetUserLoggedIn();
             this.router.navigate([""]);
           }
           else

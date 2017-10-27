@@ -11,7 +11,9 @@
         <label for="name">Vardas:</label>
         <input name="usernickname" type="text" class="form-control" placeholder="Vardas" formControlName="name">
         <div class="form-control-feedback" *ngIf="name.dirty && name.invalid">
-          Laukelis yra būtinas!
+          <p *ngIf="name.errors.required">Laukelis yra būtinas!</p>
+          <p *ngIf="name.errors.pattern">Vardas turi neleistinų simbolių</p>
+          <p *ngIf="name.errors.minlength || validatorService.MaxLength(name.value, nameMaxLength)">Vardas turi susidaryti iš daugiau nei 2 simbolių ir iš mažiau nei 16</p>
         </div>
       </div>
 

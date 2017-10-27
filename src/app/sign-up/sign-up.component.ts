@@ -20,6 +20,7 @@ export class SignUpComponent implements OnInit
   email:FormControl;
   password1:FormControl;
   password2:FormControl;
+  nameMaxLength = 15;
 
   private url:string = this.userService.baseApiUrl + "/user/create";
   public errorMessage:string;
@@ -34,7 +35,7 @@ export class SignUpComponent implements OnInit
 
   public CreateFormControls()
   {
-    this.name = new FormControl('', Validators.required);
+    this.name = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9_-]*"), Validators.minLength(3), Validators.maxLength(15)]);
     this.email = new FormControl('', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]);
     this.password1 = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.password2 = new FormControl('', [Validators.required, Validators.minLength(8)]);
@@ -65,7 +66,8 @@ export class SignUpComponent implements OnInit
       (
         this.url,
         { name: this.name.value, password: this.password1.value, email: this.email.value }
-      ).subscribe
+      )
+      .subscribe
       (
         data =>
         {
