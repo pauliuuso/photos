@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
 import { UserService } from '../services/user.service';
+import { PhotoService, IPhoto } from '../services/photo.service';
 
 @Component({
   selector: 'app-photo',
@@ -11,12 +11,12 @@ import { UserService } from '../services/user.service';
 export class PhotoComponent implements OnInit {
 
   public loading = true;
+  public showDelete = false;
   public photoId: string;
-  public url = this.userService.baseApiUrl + "/photos/getone";
-  public photo: Array<string> = new Array<string>();
+  public photo: IPhoto = { id: "", title: "", url: "", owner: "", ownerId: "" };
   public errorMessage: string;
 
-  constructor(private route: ActivatedRoute, private http: Http, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private photoService: PhotoService) { }
 
   ngOnInit()
   {
@@ -25,23 +25,39 @@ export class PhotoComponent implements OnInit {
       this.photoId = params["id"];
     });
 
-    this.http.post(this.url, {"id": this.photoId})
+    if(this.photo.ownerId === this.userService.id || this.userService.role === "admin")
+    {
+      this.showDelete = true;
+    }
+
+    this.photoService.GetPhoto(this.photoId)
     .subscribe
     (
-      data =>
-      {
-        this.photo = data.json();
-      },
-      error =>
-      {
-        this.errorMessage = error.message;
-      }
+      data => this.photo = data,
+      error => this.errorMessage = error.message
     );
+
   }
 
   public ImageLoaded()
   {
     this.loading = false;
+  }
+
+  public DeletePhoto()
+  {
+    this.photoService.DeletePhoto(this.photoId)
+    .subscribe
+    (
+      data =>
+      {
+        if(data.json().message === "OK")
+        {
+          console.log("deleted");
+        }
+      },
+      error => this.errorMessage = error.message
+    );
   }
 
 }

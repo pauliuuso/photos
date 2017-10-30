@@ -1,5 +1,8 @@
 <div class="row">
   <div class="col-12 card">
+    <div class="delete-button">
+      <button *ngIf="showDelete" class="btn btn-primary mt-2" (click)="DeletePhoto()">Ištrinti</button>
+    <div>
     <h2 class="text-center py-2">{{ photo.title }}</h2>
     <div class="col-12 pb-3 pc-center photo-container">
       <div [ngClass]="{'hidden': loading}" class="img-wrapper text-center mb-3 animated fadeIn">

@@ -9,6 +9,7 @@ export class UserService
   public name:string;
   public id:string;
   public token:string;
+  public role:string;
   public baseApiUrl = "http://photos.teroute.com/api";
 
   constructor(){}
@@ -21,17 +22,19 @@ export class UserService
     localStorage.setItem("id", this.id);
     localStorage.setItem("email", this.email);
     localStorage.setItem("name", this.name);
+    localStorage.setItem("role", this.role);
   }
 
   public CheckUserInStorage()
   {
-    if(localStorage.getItem("isLogged") == "true")
+    if(localStorage.getItem("isLogged") === "true")
     {
       this.isLogged = true;
       this.email = localStorage.getItem("email");
       this.name = localStorage.getItem("name");
       this.id = localStorage.getItem("id");
       this.token = localStorage.getItem("token");
+      this.role = localStorage.getItem("role");
     }
   }
 
@@ -42,6 +45,7 @@ export class UserService
     this.name = "";
     this.id = "";
     this.token = "";
+    this.role = "";
     localStorage.clear();
   }
 

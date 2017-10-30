@@ -31,3 +31,8 @@
 {
   height: 700px;
 }
+
+.delete-button
+{
+  text-align: right;
+}
