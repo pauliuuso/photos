@@ -35,7 +35,7 @@ export class SignUpComponent implements OnInit
 
   public CreateFormControls()
   {
-    this.name = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9_-]*"), Validators.minLength(3), Validators.maxLength(15)]);
+    this.name = new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9_-]*"), Validators.minLength(3), Validators.maxLength(15)]);
     this.email = new FormControl('', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]);
     this.password1 = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.password2 = new FormControl('', [Validators.required, Validators.minLength(8)]);
@@ -78,6 +78,7 @@ export class SignUpComponent implements OnInit
             this.userService.name = this.name.value;
             this.userService.id = response["id"];
             this.userService.token = response["token"];
+            this.userService.role = response["role"];
 
             this.userService.SetUserLoggedIn();
             this.router.navigate([""]);

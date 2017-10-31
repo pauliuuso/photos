@@ -30,6 +30,9 @@ export class DashboardItemComponent implements OnInit {
   @Input()
   id: string;
 
+  @Input()
+  description: string;
+
   constructor() { }
 
   ngOnInit() {
@@ -43,6 +46,11 @@ export class DashboardItemComponent implements OnInit {
     this.imageHeight = this.picture.nativeElement.height;
     this.CenterImage();
     this.loading = false;
+  }
+
+  public decode(text: string)
+  {
+    return decodeURI(text);
   }
 
   public CenterImage()

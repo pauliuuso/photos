@@ -68,6 +68,7 @@ export class LoginformComponent implements OnInit, OnDestroy
             this.userService.id = response["id"];
             this.userService.token = response["token"];
             this.userService.name = response["name"];
+            this.userService.role = response["role"];
 
             this.userService.SetUserLoggedIn();
             this.router.navigate([""]);

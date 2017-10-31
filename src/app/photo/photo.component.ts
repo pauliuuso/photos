@@ -13,7 +13,7 @@ export class PhotoComponent implements OnInit {
   public loading = true;
   public showDelete = false;
   public photoId: string;
-  public photo: IPhoto = { id: "", title: "", url: "", owner: "", ownerId: "" };
+  public photo: IPhoto = { id: "", title: "", url: "", owner: "", ownerId: "", description: "" };
   public errorMessage: string;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private photoService: PhotoService) { }
@@ -25,18 +25,26 @@ export class PhotoComponent implements OnInit {
       this.photoId = params["id"];
     });
 
+    this.photoService.GetPhoto(this.photoId)
+    .subscribe
+    (
+      data => { this.photo = data; this.CheckShowDelete()},
+      error => this.errorMessage = error.message
+    );
+
+  }
+
+  public CheckShowDelete()
+  {
     if(this.photo.ownerId === this.userService.id || this.userService.role === "admin")
     {
       this.showDelete = true;
     }
+  }
 
-    this.photoService.GetPhoto(this.photoId)
-    .subscribe
-    (
-      data => this.photo = data,
-      error => this.errorMessage = error.message
-    );
-
+  public decode(text: string)
+  {
+    return decodeURI(text);
   }
 
   public ImageLoaded()

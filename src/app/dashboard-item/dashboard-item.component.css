@@ -1,7 +1,12 @@
 .dashboard-item
 {
-    text-decoration: none;
-    color: darkslategrey;
+  text-decoration: none;
+  color: darkslategrey;
+}
+
+.picture-text-wrapper
+{
+  overflow: hidden;
 }
 
 .dashboard-image-wrapper

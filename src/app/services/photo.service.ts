@@ -31,4 +31,5 @@ export interface IPhoto
   url: string;
   owner: string;
   ownerId: string;
+  description: string;
 }

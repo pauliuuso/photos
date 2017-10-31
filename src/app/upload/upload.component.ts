@@ -55,10 +55,10 @@ export class UploadComponent implements OnInit
     {
       this.picture = new FormData();
       this.picture.append("picture", fileList[0]);
-      this.picture.append("title", this.pictureName.value);
+      this.picture.append("title", encodeURI(this.pictureName.value));
       this.picture.append("token", this.userService.token);
       this.picture.append("userId", this.userService.id);
-      this.picture.append("description", this.description.value);
+      this.picture.append("description", encodeURI(this.description.value));
 
       // picture validation
       const type = this.picture.get("picture")["type"];
