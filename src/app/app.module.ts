@@ -19,6 +19,7 @@ import { ValidatorService } from './services/validator.service';
 import { UploadComponent } from './upload/upload.component';
 import { PhotoComponent } from './photo/photo.component';
 import { DashboardItemComponent } from './dashboard-item/dashboard-item.component';
+import { VoteComponent } from './vote/vote.component';
 
 const appRoutes: Routes =
 [
@@ -58,7 +59,8 @@ const appRoutes: Routes =
     SignUpComponent,
     UploadComponent,
     PhotoComponent,
-    DashboardItemComponent
+    DashboardItemComponent,
+    VoteComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

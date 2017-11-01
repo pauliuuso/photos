@@ -1,0 +1,37 @@
+.vote-button
+{
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  padding-top: 2px;
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.vote-button:hover
+{
+  cursor: pointer;
+}
+
+.vote-button:focus
+{
+  background: red;
+}
+
+.vote-button-minus
+{
+  background: lightcoral;
+}
+
+.vote-button-plus
+{
+  background: lightgreen
+}
+
+.vote-button-neutral
+{
+  background: lightgray;
+}

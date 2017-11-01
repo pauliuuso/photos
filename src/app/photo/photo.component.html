@@ -1,20 +1,23 @@
 <div class="row">
   <div class="col-12 card">
-    <div class="delete-button">
-      <button *ngIf="showDelete" class="btn btn-primary mt-2" (click)="DeletePhoto()">Ištrinti</button>
-    <div>
-    <h2 class="text-center py-2">{{ decode(photo.title) }}</h2>
-    <div class="col-12 pb-3 pc-center photo-container">
-      <div [ngClass]="{'hidden': loading}" class="img-wrapper text-center mb-3 animated fadeIn">
-        <img (load)="ImageLoaded()" class="pc-center photo" src="{{ photo.url }}"><br/>
+    <div class="row">
+      <div class="col-12 delete-button">
+        <button *ngIf="showDelete" class="btn btn-primary mt-2" (click)="DeletePhoto()">Ištrinti</button>
       </div>
-      <div [ngClass]="{'hidden': !loading}" class="img-wrapper text-center mb-3 photo-loader-wrapper">
-        <i class="fa fa-spinner fa-spin photo-loader-spinner"></i>
-      </div>
-      <div class="row">
-        <p><i>Author: <span class="text-grey">{{ decode(photo.owner) }}</span></i></p><br />
-      </div>
-      <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-12 pb-3 pc-center photo-container">
+        <h2 class="text-center py-2">{{ decode(photo.title) }}</h2>
+        <div [ngClass]="{'hidden': loading}" class="img-wrapper text-center mb-3 animated fadeIn">
+          <img (load)="ImageLoaded()" class="pc-center photo" src="{{ photo.url }}"><br/>
+        </div>
+
+        <app-vote></app-vote>
+
+        <div [ngClass]="{'hidden': !loading}" class="img-wrapper text-center mb-3 photo-loader-wrapper">
+          <i class="fa fa-spinner fa-spin photo-loader-spinner"></i>
+        </div>
+        <p class="m-0"><i>Autorius: <span class="text-grey">{{ decode(photo.owner) }}</span></i></p><br />
         <p class="text-left">Aprašymas: <span class="text-grey">{{ decode(photo.description) }}</span></p>
       </div>
     </div>
