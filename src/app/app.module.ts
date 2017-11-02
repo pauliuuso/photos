@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './services/user.service';
 import { PhotoService } from './services/photo.service';
+import { VoteService } from './services/vote.service';
 import { AuthGuard } from './guards/auth.guard';
 import { HttpModule } from '@angular/http';
 import { LoginButtonComponent } from './login-button/login-button.component';
@@ -69,7 +70,7 @@ const appRoutes: Routes =
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, PhotoService, ValidatorService, AuthGuard],
+  providers: [UserService, PhotoService, VoteService, ValidatorService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

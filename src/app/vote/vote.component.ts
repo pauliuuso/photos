@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { VoteService, IVoted } from '../services/vote.service';
+import { UserService } from '../services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vote',
@@ -7,6 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VoteComponent implements OnInit
 {
+
+  public photoId: string;
+  public voted: IVoted = { voted: true, message: "" };
+  public errorMessage: string;
+
   buttons: any[] =
   [
     { "value": -5 , "class": "vote-button-minus"},
@@ -22,16 +30,33 @@ export class VoteComponent implements OnInit
     { "value": 5 , "class": "vote-button-plus"}
   ];
 
-  constructor() { }
+  constructor(private voteService: VoteService, private route: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit()
   {
+
+    this.route.params.subscribe(params =>
+    {
+      this.photoId = params["id"];
+    });
+
+    this.voteService.CheckIfVoted(this.photoId, this.userService.id)
+    .subscribe
+    (
+      data => this.voted = data,
+      error => this.errorMessage = error.message
+    );
 
   }
 
   public Vote(value: number)
   {
-    console.log(value);
+    this.voteService.SendVote(this.photoId, value, this.userService.id)
+    .subscribe
+    (
+      data => this.voted = data,
+      error => this.errorMessage = error.message
+    );
   }
 
 }

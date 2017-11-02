@@ -28,7 +28,7 @@ export class PhotoComponent implements OnInit {
     this.photoService.GetPhoto(this.photoId)
     .subscribe
     (
-      data => { this.photo = data; this.CheckShowDelete()},
+      data => { this.photo = data; this.CheckShowDelete(); },
       error => this.errorMessage = error.message
     );
 
