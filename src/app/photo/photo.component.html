@@ -12,11 +12,12 @@
           <img (load)="ImageLoaded()" class="pc-center photo" src="{{ photo.url }}"><br/>
         </div>
 
-        <app-vote></app-vote>
-
         <div [ngClass]="{'hidden': !loading}" class="img-wrapper text-center mb-3 photo-loader-wrapper">
           <i class="fa fa-spinner fa-spin photo-loader-spinner"></i>
         </div>
+
+        <app-vote></app-vote>
+
         <p class="m-0"><i>Autorius: <span class="text-grey">{{ decode(photo.owner) }}</span></i></p><br />
         <p class="text-left">Aprašymas: <span class="text-grey">{{ decode(photo.description) }}</span></p>
       </div>

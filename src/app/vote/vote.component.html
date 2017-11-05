@@ -1,5 +1,8 @@
-<div *ngIf="!voted.voted">
+<div *ngIf="voted.voted == 'false'">
   <h4>Balsuoti:</h4>
   <div *ngFor="let button of buttons; let a = index" class="vote-button {{button.class}}" (click)="Vote(button.value)">{{ button.value }}</div>
   <div class="clearfix pb-5"></div>
 </div>
+<p *ngIf="votingInProgress">Balsuojama <i class="fa fa-spinner fa-spin"></i></p>
+<p class="text-primary">{{voteMessage}}</p>
+<p class="text-warning">{{errorMessage}}</p>

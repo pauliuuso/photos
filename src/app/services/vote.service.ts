@@ -17,9 +17,9 @@ export class VoteService
     .map(data => data.json() as IVoted);
   }
 
-  public SendVote(photoId: string, value: number, userId: string): Observable<IVoted>
+  public SendVote(photoId: string, value: number, userId: string, token: string): Observable<IVoted>
   {
-    return this.http.post(this.voteUrl, {"photoId": photoId, "userId": userId, "value": value})
+    return this.http.post(this.voteUrl, {"photoId": photoId, "userId": userId, "value": value, "token": token})
     .map( data => data.json() as IVoted );
   }
 
@@ -28,5 +28,6 @@ export class VoteService
 export interface IVoted
 {
   message: string;
-  voted: boolean;
+  voted: string;
+  token: string;
 }

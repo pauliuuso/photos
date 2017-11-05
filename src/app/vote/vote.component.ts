@@ -12,8 +12,10 @@ export class VoteComponent implements OnInit
 {
 
   public photoId: string;
-  public voted: IVoted = { voted: true, message: "" };
+  public voted: IVoted = { voted: "true", message: "", token: "" };
   public errorMessage: string;
+  public voteMessage: string;
+  public votingInProgress = false;
 
   buttons: any[] =
   [
@@ -43,7 +45,14 @@ export class VoteComponent implements OnInit
     this.voteService.CheckIfVoted(this.photoId, this.userService.id)
     .subscribe
     (
-      data => this.voted = data,
+      data => 
+      {
+        this.voted = data;
+        if (data.voted === "true")
+        {
+          this.voteMessage = "Ačiū už balsą!";
+        }
+      },
       error => this.errorMessage = error.message
     );
 
@@ -51,11 +60,34 @@ export class VoteComponent implements OnInit
 
   public Vote(value: number)
   {
-    this.voteService.SendVote(this.photoId, value, this.userService.id)
+    this.votingInProgress = true;
+    this.errorMessage = "";
+    this.voteMessage = "";
+
+    this.voteService.SendVote(this.photoId, value, this.userService.id, this.userService.token)
     .subscribe
     (
-      data => this.voted = data,
-      error => this.errorMessage = error.message
+      data => 
+      {
+        this.votingInProgress = false;
+        this.voted = data;
+        this.userService.token = data.token;
+        this.userService.SetUserLoggedIn();
+        if(data.message === "OK")
+        {
+          this.voteMessage = "Ačiū už balsą!";
+        }
+        else
+        {
+          this.errorMessage = "Balsuoti nepavyko, bandykite dar kartą."
+        }
+
+      },
+      error => 
+      {
+        this.votingInProgress = false;
+        this.errorMessage = error.message
+      }
     );
   }
 
