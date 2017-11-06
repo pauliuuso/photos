@@ -1,0 +1,4 @@
+<div *ngFor="let vote of votes" class="row col-12">
+  <p class="m-0"><span class="vote vote-plus">{{ vote.value }}</span></p>
+  <p class="pt-2 pl-1"><a routerLink="/gallery/{{id}}">{{ vote.user }}</a></p>
+</div>

@@ -8,6 +8,7 @@ export class VoteService
 {
   public checkUrl = this.userService.baseApiUrl + "/photos/checkvoted";
   public voteUrl = this.userService.baseApiUrl + "/photos/vote";
+  public getVotesUrl = this.userService.baseApiUrl + "/photos/votes";
 
   constructor(private http: Http, private userService: UserService) {}
 
@@ -23,6 +24,12 @@ export class VoteService
     .map( data => data.json() as IVoted );
   }
 
+  public GetVotes(photoId: string)
+  {
+    return this.http.post(this.getVotesUrl, { "photoId": photoId })
+    .map( data => data.json() as IVote[]);
+  }
+
 }
 
 export interface IVoted
@@ -30,4 +37,10 @@ export interface IVoted
   message: string;
   voted: string;
   token: string;
+}
+
+export interface IVote
+{
+  user: string;
+  value: string;
 }

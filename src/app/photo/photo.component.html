@@ -18,8 +18,17 @@
 
         <app-vote></app-vote>
 
-        <p class="m-0"><i>Autorius: <span class="text-grey">{{ decode(photo.owner) }}</span></i></p><br />
-        <p class="text-left">Aprašymas: <span class="text-grey">{{ decode(photo.description) }}</span></p>
+        <div class="row">
+          <div class="col-12 col-sm-8 col-lg-10">
+            <p class="m-0"><i>Autorius: <span class="text-grey">{{ decode(photo.owner) }}</span></i></p><br />
+            <p class="text-left">Aprašymas: <span class="text-grey">{{ decode(photo.description) }}</span></p>
+          </div>
+          <div class="col-12 col-sm-4 col-lg-2">
+            <p>Balsai:</p>
+            <app-votes></app-votes>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

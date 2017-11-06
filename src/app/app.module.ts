@@ -21,6 +21,8 @@ import { UploadComponent } from './upload/upload.component';
 import { PhotoComponent } from './photo/photo.component';
 import { DashboardItemComponent } from './dashboard-item/dashboard-item.component';
 import { VoteComponent } from './vote/vote.component';
+import { VotesComponent } from './votes/votes.component';
+import { PrivateGalleryComponent } from './private-gallery/private-gallery.component';
 
 const appRoutes: Routes =
 [
@@ -44,6 +46,10 @@ const appRoutes: Routes =
   {
     path: 'photo/:id',
     component: PhotoComponent
+  },
+  {
+    path: 'gallery/:id',
+    component: PrivateGalleryComponent
   }
 ];
 
@@ -61,7 +67,9 @@ const appRoutes: Routes =
     UploadComponent,
     PhotoComponent,
     DashboardItemComponent,
-    VoteComponent
+    VoteComponent,
+    VotesComponent,
+    PrivateGalleryComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

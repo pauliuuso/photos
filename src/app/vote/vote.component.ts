@@ -45,7 +45,7 @@ export class VoteComponent implements OnInit
     this.voteService.CheckIfVoted(this.photoId, this.userService.id)
     .subscribe
     (
-      data => 
+      data =>
       {
         this.voted = data;
         if (data.voted === "true")
@@ -67,7 +67,7 @@ export class VoteComponent implements OnInit
     this.voteService.SendVote(this.photoId, value, this.userService.id, this.userService.token)
     .subscribe
     (
-      data => 
+      data =>
       {
         this.votingInProgress = false;
         this.voted = data;
@@ -83,7 +83,7 @@ export class VoteComponent implements OnInit
         }
 
       },
-      error => 
+      error =>
       {
         this.votingInProgress = false;
         this.errorMessage = error.message

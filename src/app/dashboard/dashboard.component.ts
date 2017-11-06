@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+import { PhotoService, IPhoto } from '../services/photo.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,56 +11,17 @@ export class DashboardComponent implements OnInit {
 
   private url = this.userService.baseApiUrl + "/photos/getall";
   public errorMessage;
-  public photos;
+  public photos: IPhoto[];
 
-  constructor(private userService: UserService, private http: Http) 
-  {
-    this.photos = new Array<Object>();
-  }
+  constructor(private userService: UserService, private photoService: PhotoService) {}
 
-  ngOnInit() 
+  ngOnInit()
   {
-    this.http.get(this.url)
+    this.photoService.GetPhotos("")
     .subscribe
     (
-      data => 
-      {
-        this.photos = data.json()["photos"];
-      },
-      error =>
-      {
-        this.errorMessage = error.message;
-      }
-    )
-
-    // this.GetPhotos().subscribe( data =>
-    // {
-    //   this.photos = data;
-    // });
+      data => { this.photos = data; },
+      error => { this.errorMessage = error.message; }
+    );
   }
-
-  GetPhotos(): Observable<PhotoItem[]>
-  {
-    return this.http.get(this.url)
-    .map(res => 
-    {
-
-      return res.json().results.map(item =>
-      {
-        return new PhotoItem
-        (
-          item.message
-        );
-      });
-    });
-  }
-
-}
-
-class PhotoItem
-{
-  constructor
-  (
-    public message: string
-  ){}
 }

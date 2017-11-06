@@ -1,32 +1,43 @@
-.vote-button
+.vote
 {
   width: 40px;
   height: 40px;
   color: white;
   font-size: 22px;
   text-align: center;
-  float: left;
   padding-top: 2px;
+  float: left;
   margin-right: 5px;
   margin-bottom: 5px;
 }
 
-.vote-button:hover
+.vote:hover
 {
-  cursor: pointer;
+  cursor: default;
 }
 
-.vote-button-minus
+.vote-user
+{
+  font-size: 18px;
+}
+
+.vote-wrapper
+{
+  position: relative;
+  display: block;
+}
+
+.vote-minus
 {
   background: lightcoral;
 }
 
-.vote-button-plus
+.vote-plus
 {
   background: lightgreen
 }
 
-.vote-button-neutral
+.vote-neutral
 {
   background: lightgray;
 }
