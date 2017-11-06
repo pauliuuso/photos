@@ -7,5 +7,8 @@
       <div class="navbar-nav">
         <a routerLink="/upload" class="nav-item nav-link" *ngIf="userService.GetUserLoggedIn()">Įkelti nuotrauką</a>
       </div>
+      <div class="navbar-nav">
+        <a routerLink="/gallery/{{id}}" class="nav-item nav-link" *ngIf="userService.GetUserLoggedIn()">Tavo galerija</a>
+      </div>
     </div>
   </nav>

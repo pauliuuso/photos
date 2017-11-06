@@ -31,3 +31,14 @@ button
 {
   color: darkslategrey;
 }
+
+.pt-spinner
+{
+  font-size: 36px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 150px;
+  width: 100%;
+  color: lightslategray;
+}

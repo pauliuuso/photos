@@ -1,10 +1,11 @@
 .pc-body
 {
     background: #d9cfc1;
-    display: flex;
+    min-height: 800px;
+    /*display: flex;
     flex: auto;
     flex-direction: row;
-    justify-content: flex-start; /* align items in Main Axis */
-    align-items: stretch; /* align items in Cross Axis */
-    align-content: stretch; /* Extra space in Cross Axis */
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;*/
 }

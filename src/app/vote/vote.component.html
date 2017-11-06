@@ -1,4 +1,4 @@
-<div *ngIf="voted.voted == 'false'">
+<div *ngIf="voted.voted == 'false' && userService.GetUserLoggedIn() && !votingInProgress">
   <h4>Balsuoti:</h4>
   <div *ngFor="let button of buttons; let a = index" class="vote-button {{button.class}}" (click)="Vote(button.value)">{{ button.value }}</div>
   <div class="clearfix pb-5"></div>
