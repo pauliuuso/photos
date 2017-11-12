@@ -9,6 +9,8 @@ export class PhotoService
 {
   public getOnePhotoUrl = this.userService.baseApiUrl + "/photos/getone";
   public getAllPhotosUrl = this.userService.baseApiUrl + "/photos/getall";
+  public getAllPhotosByIdUrl = this.userService.baseApiUrl + "/photos/getallbyid";
+  public getGalleryOwnerUrl = this.userService.baseApiUrl + "/photos/getgalleryowner";
   public deleteUrl = this.userService.baseApiUrl + "/photos/delete";
 
   constructor(private http: Http, private userService: UserService) {}
@@ -26,9 +28,22 @@ export class PhotoService
 
   public GetPhotos(userId?: string)
   {
-    // TODO change to post
-    return this.http.get(this.getAllPhotosUrl)
-    .map(data => data.json().photos as IPhoto[]);
+    if(userId)
+    {
+      return this.http.post(this.getAllPhotosByIdUrl, {"id": userId})
+      .map(data => data.json().photos as IPhoto[]);
+    }
+    else
+    {
+      return this.http.get(this.getAllPhotosUrl)
+      .map(data => data.json().photos as IPhoto[]);
+    }
+  }
+
+  public GetGalleryOwner(userId: string)
+  {
+    return this.http.post(this.getGalleryOwnerUrl, {"id": userId})
+    .map(data => data.json().name);
   }
 
 }

@@ -12,7 +12,7 @@ export class VotesComponent implements OnInit {
 
   public photoId: string;
   public errorMessage: string;
-  public votes: IVote[] = [{value: "5", user: "Paulius"}, {value: "-2", user: "Urtė"}, {value: "0", user: "Sauron"}];
+  public votes: IVote[] = [{value: "5", user: "Paulius", userId: "4"}];
   public id:string;
 
   constructor(private route: ActivatedRoute, private voteService: VoteService, private userService: UserService) { }

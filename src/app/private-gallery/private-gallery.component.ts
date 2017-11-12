@@ -11,18 +11,35 @@ import { UserService } from '../services/user.service';
 export class PrivateGalleryComponent implements OnInit {
 
   public photos: IPhoto[];
+  public galleryOwner: string;
   public errorMessage: string;
+  public ownerId: string;
 
-  constructor(private photoService: PhotoService, private userService: UserService) { }
+  constructor(private photoService: PhotoService, private userService: UserService, private route: ActivatedRoute) 
+  {
+
+  }
 
   ngOnInit()
   {
-    this.photoService.GetPhotos(this.userService.id)
-    .subscribe
-    (
-      data => this.photos = data,
-      error => this.errorMessage = error.message
-    );
+    this.route.params.subscribe(params =>
+    {
+      this.ownerId = params["id"];
+      
+      this.photoService.GetPhotos(this.ownerId)
+      .subscribe
+      (
+        data => this.photos = data,
+        error => this.errorMessage = error.message
+      );
+  
+      this.photoService.GetGalleryOwner(this.ownerId)
+      .subscribe
+      (
+        data => this.galleryOwner = data,
+        error => this.errorMessage = error.message
+      );
+    });
   }
 
 }

@@ -1,0 +1,13 @@
+.pt-menu
+{
+    background: lightgoldenrodyellow;
+    font-size: 20px;
+}
+
+.pt-menu a
+{
+    display: inline;
+    text-decoration: none;
+    color: lightslategrey;
+    margin-right: 20px;
+}

@@ -8,13 +8,11 @@ import { UserService } from '../services/user.service';
 })
 export class MenuComponent implements OnInit {
 
-  public id: string;
-
   constructor(public userService:UserService) { }
 
   ngOnInit()
   {
-    this.id = this.userService.id;
+
   }
 
 }

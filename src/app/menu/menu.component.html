@@ -1,14 +1,5 @@
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded col-12">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a routerLink="/" class="navbar-brand" href="#">Pradžia</a>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a routerLink="/upload" class="nav-item nav-link" *ngIf="userService.GetUserLoggedIn()">Įkelti nuotrauką</a>
-      </div>
-      <div class="navbar-nav">
-        <a routerLink="/gallery/{{id}}" class="nav-item nav-link" *ngIf="userService.GetUserLoggedIn()">Tavo galerija</a>
-      </div>
-    </div>
-  </nav>
+<div class="col-12 pt-menu pt-2 pb-2 pl-4">
+  <a routerLink="">Pradžia</a>
+  <a routerLink="/upload" *ngIf="userService.GetUserLoggedIn()">Įkelti nuotrauką</a>
+  <a routerLink="/gallery/{{userService.id}}" *ngIf="userService.GetUserLoggedIn()">Tavo galerija</a>
+</div>

@@ -42,5 +42,6 @@ export interface IVoted
 export interface IVote
 {
   user: string;
+  userId: string;
   value: string;
 }
