@@ -23,6 +23,7 @@ import { DashboardItemComponent } from './dashboard-item/dashboard-item.componen
 import { VoteComponent } from './vote/vote.component';
 import { VotesComponent } from './votes/votes.component';
 import { PrivateGalleryComponent } from './private-gallery/private-gallery.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const appRoutes: Routes =
 [
@@ -78,7 +79,7 @@ const appRoutes: Routes =
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, PhotoService, VoteService, ValidatorService, AuthGuard],
+  providers: [UserService, PhotoService, VoteService, ValidatorService, AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

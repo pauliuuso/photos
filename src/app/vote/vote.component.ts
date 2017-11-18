@@ -32,7 +32,7 @@ export class VoteComponent implements OnInit
     { "value": 5 , "class": "vote-button-plus"}
   ];
 
-  constructor(private voteService: VoteService, private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private voteService: VoteService, private route: ActivatedRoute, public userService: UserService) { }
 
   ngOnInit()
   {
